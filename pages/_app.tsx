@@ -1,6 +1,19 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+import eventReducer from "../customhook/store/eventSlice";
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+const store = configureStore({
+  reducer: {
+    event: eventReducer,
+  },
+});
+
+function MyApp({ Component, pageProps }) {
+  return (
+    <Provider store={store}>
+      <Component {...pageProps} />
+    </Provider>
+  );
 }
+
+export default MyApp;
